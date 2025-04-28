@@ -1,0 +1,7 @@
+.page-name {
+    text-shadow: -3px 0px 0px #242422,
+    -4px 0px 0px #f7a813;
+}
+.aside.active {
+    margin: 0;
+}

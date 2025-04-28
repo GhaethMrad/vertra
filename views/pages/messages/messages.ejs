@@ -1,0 +1,58 @@
+<div class="!overflow-x-auto">
+    <table class="w-full whitespace-nowrap">
+        <thead class="bg-[#f7a813]">
+            <th class="border-[1px] p-[15px] text-white border-[#eee]">Name</th>
+            <th class="border-[1px] p-[15px] text-white border-[#eee]">Email</th>
+            <th class="border-[1px] p-[15px] text-white border-[#eee]">Message</th>
+            <th class="border-[1px] p-[15px] text-white border-[#eee]">Action</th>
+        </thead>
+        <tbody>
+            <% if (data.length > 0) { %>
+                <% data.forEach(element => { %>
+                    <tr>
+                        <td class="p-[15px] border-[2px] text-center border-[#eee]"><%= element.name %></td>
+                        <td class="p-[15px] border-[2px] text-center border-[#eee]"><%= element.email %></td>
+                        <td class="p-[15px] border-[2px] text-center border-[#eee]"><%= element.message %></td>
+                        <td class="p-[15px] border-[2px] text-center border-[#eee]">
+                            <form class="w-full" action="/api/message/<%= element._id %>?_method=DELETE" method="POST">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <input class="bg-red-500 duration-300 hover:bg-red-600 text-white cursor-pointer w-full py-[10px] rounded-3xl" type="submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td class="p-[15px] border-[2px] text-center border-[#eee]" colspan="4">Not Found</td>
+                </tr>
+            <% } %>
+        </tbody>
+        <% if (data.length > 1) { %>
+            <tfoot>
+                <td class="p-[15px] border-[2px] text-center border-[#eee]" colspan="4">
+                    <form class="w-full" action="/api/message/delete-all?_method=DELETE" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <input class="bg-red-500 duration-300 hover:bg-red-600 text-white cursor-pointer w-full py-[10px] rounded-3xl" type="submit" value="Delete All">
+                    </form>
+                </td>
+            </tfoot>
+        <% } %>
+    </table>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search)
+
+            if (params.has("done")) {
+                Swal.fire({
+                    title: 'success',
+                    text: "The operation was completed successfully",
+                    icon: "success",
+                    confirmButtonText: 'DONE'
+                }).then(() => {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                });
+            }
+        })
+</script>

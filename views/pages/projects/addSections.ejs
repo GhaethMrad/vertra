@@ -1,0 +1,45 @@
+<form class="flex flex-col gap-[30px]" action="/api/projects/sections" method="POST" enctype="multipart/form-data">
+    <div class="input">
+        <label class="text-[#f7a813] font-bold" for="main-section-name">Main Section Name</label>
+        <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="text" name="mainSectionName" id="main-section-name" required>
+    </div>
+    <div class="input">
+        <label class="text-[#f7a813] font-bold" for="main-section-image">Main Section Image</label>
+        <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="file" name="mainSectionImage" id="main-section-image" required>
+    </div>
+    <select class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" name="" id="count-of-section" required>
+        <option selected hidden value="">Count Of SubSections</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <div class="inputs">
+        
+    </div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input class="bg-[#f7a813] py-[15px] text-white cursor-pointer" type="submit" value="Add">
+</form>
+<script>
+    const countOfSection = document.getElementById("count-of-section");
+    let inputs = document.querySelector(".inputs");
+
+    countOfSection.addEventListener("change", (e) => {
+        inputs.innerHTML = "";
+        for (let i = 0; i < +e.target.value; i++) {
+            inputs.innerHTML += `
+                <div class="input grid grid-cols-1 gap-[20px] md:grid-cols-2">
+                    <div>
+                        <label class="text-[#f7a813] font-bold" for="sectionName">Section <${i + 1}> Name</label>
+                        <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="text" name="sectionName" id="sectionName" required>
+                    </div>
+                    <div>
+                        <label class="text-[#f7a813] font-bold" for="sectionImage">Section <${i + 1}> Image</label>
+                        <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="file" name="img" id="sectionImage" required>
+                    </div>
+                </div>
+            `
+        }
+    })
+</script>

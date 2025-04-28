@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Login</title>
+</head>
+<body class="bg-[#242422] h-screen flex justify-center items-center">
+    <form class="flex flex-col gap-[25px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" action="/api" method="POST">
+        <h1 class="uppercase text-[40px] text-center font-bold text-[#b5872c]">welcome</h1>
+        <input class="p-[15px] relative w-[300px] focus:bg-[#b5872c] duration-300 rounded-2xl bg-white border-none outline-none text-black" type="text" name="username" placeholder="Username" required>
+        <input class="p-[15px] relative w-[300px] focus:bg-[#b5872c] duration-300 rounded-2xl bg-white border-none outline-none text-black" type="password" name="password" placeholder="Password" required>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input class="uppercase bg-[#b5872c] cursor-pointer duration-300 hover:bg-white hover:text-[#b5872c] text-[20px] text-white py-[15px] rounded-full" type="submit" value="login">
+    </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search)
+
+            if (params.has("error")) {
+                Swal.fire({
+                    title: 'Warning',
+                    text: "Incorrect Username Or Password",
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                });
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<div class="bg-[#eee] mb-[50px] p-[25px] flex flex-col items-center">
+    <a class="py-[10px] px-[25px] bg-[#f7a813] text-white" href="/projects/create/sections">Add Main Sections</a>
+</div>
+
+<% if (data.length > 0) { %>
+    <div class="cards grid grid-cols-1 gap-[20px] md:grid-cols-2 lg:grid-cols-3">
+        <% data.forEach(element => { %>
+            <div class="p-[20px] bg-[#eee] border-[2px] border-[#f7a813] rounded-3xl flex flex-col gap-[20px]">
+                <img src="<%= element.img %>" alt="">
+                <h1 class="text-[20px] w-fit mx-auto font-bold text-[#f7a813]"><%= element.name %></h1>
+                <div class="actions w-fit mx-auto flex gap-[20px]">
+                    <% if (subSectionsCount > 0) { %>
+                        <a class="py-[10px] px-[20px] bg-[#f7a813] text-white" href="/projects/create/<%= element._id %>">Add Project</a>
+                    <% } %>
+                    <a class="py-[10px] px-[20px] bg-[#333] text-white" href="/projects/subSections/<%= element._id %>">Details</a>
+                </div>
+                <form class="w-fit mx-auto" action="/api/projects/<%= element._id %>?_method=DELETE" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <input class="py-[10px] px-[20px] cursor-pointer bg-red-500 text-white" type="submit" value="Delete">
+                </form>
+            </div>
+        <% }) %>
+    </div>
+<% } else { %>
+    <h1 class="w-fit mx-auto text-[25px] font-bold text-[#f7a813] capitalize">Not Found</h1>
+<% } %>

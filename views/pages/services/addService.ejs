@@ -1,0 +1,52 @@
+<form class="bg-[#eee] p-[20px] flex flex-col gap-[20px]" action="/api/services" method="POST" enctype="multipart/form-data">
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] font-bold" for="name">Service Name</label>
+        <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="text" name="serviceName" id="name" required>
+    </div>
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] font-bold" for="image">Service Image</label>
+        <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="file" name="serviceImage" id="image" required>
+    </div>
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] font-bold" for="count-of-section">Count Of Section</label>
+        <select class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" name="" id="count-of-section" required>
+            <option selected hidden value="">Count Of Sections</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    <div class="inputs">
+
+    </div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input class="p-[15px] bg-[#f7a813] text-white text-[25px] cursor-pointer" type="submit" value="Add Service">
+</form>
+<script>
+    const countOfSection = document.getElementById("count-of-section");
+    let inputs = document.querySelector(".inputs");
+
+    countOfSection.addEventListener("change", (e) => {
+        inputs.innerHTML = "";
+        for (let i = 0; i < +e.target.value; i++) {
+            inputs.innerHTML += `
+                <div class="input grid grid-cols-1 gap-[20px] md:grid-cols-2 lg:grid-cols-3">
+                    <div>
+                        <label class="text-[#f7a813] font-bold" for="sections">Section<${i + 1}>Title</label>
+                        <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="text" name="title" id="sections" required>
+                    </div>
+                    <div>
+                        <label class="text-[#f7a813] font-bold" for="sectionsImages">Section<${i + 1}>Image</label>
+                        <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="file" name="img" id="sectionsImages" required>
+                    </div>
+                    <div>
+                        <label class="text-[#f7a813] font-bold" for="sectionsDesc">Section<${i + 1}>Desc</label>
+                        <textarea class="bg-white outline-none h-[250px] w-full p-[20px] border-[2px] border-[#f7a813]" name="desc" id="sectionsDesc" required></textarea>
+                    </div>
+                </div>
+            `
+        }
+    })
+</script>

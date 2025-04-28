@@ -1,0 +1,30 @@
+<form class="bg-[#eee] p-[20px] flex flex-col gap-[20px]" action="/api/services/<%= data._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] font-bold" for="name">Service Name</label>
+        <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="text" value="<%= data.serviceName %>" name="serviceName" id="name">
+    </div>
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] font-bold" for="image">Service Image</label>
+        <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="file" name="serviceImage" id="image">
+    </div>
+    <div class="inputs">
+        <% data.sections.forEach((element, index) => { %>
+            <div class="input grid grid-cols-1 gap-[20px] md:grid-cols-2 lg:grid-cols-3">
+                <div>
+                    <label class="text-[#f7a813] font-bold" for="sections">Section <%= index + 1 %> Title</label>
+                    <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="text" value="<%= data.sections[index].title %>" name="title" id="sections">
+                </div>
+                <div>
+                    <label class="text-[#f7a813] font-bold" for="sectionsImages">Section <%= index + 1 %> Image</label>
+                    <input class="bg-white outline-none w-full p-[20px] border-[2px] border-[#f7a813]" type="file" name="img" id="sectionsImages">
+                </div>
+                <div>
+                    <label class="text-[#f7a813] font-bold" for="sectionsDesc">Section <%= index + 1 %> Desc</label>
+                    <textarea class="bg-white outline-none h-[250px] w-full p-[20px] border-[2px] border-[#f7a813]" name="desc" id="sectionsDesc"><%= data.sections[index].desc %></textarea>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input class="p-[15px] bg-[#f7a813] text-white text-[25px] cursor-pointer" type="submit" value="Update">
+</form>

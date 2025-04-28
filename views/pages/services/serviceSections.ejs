@@ -1,0 +1,40 @@
+<div class="cards grid grid-cols-1 gap-[30px] md:grid-cols-2 lg:grid-cols-3">
+    <% data.forEach(element => { %>
+        <form class="card bg-[#eee] p-[20px] text-center rounded-3xl flex flex-col gap-[15px] border-[2px] border-[#f7a813]" action="/api/services/<%= id %>/sections/<%= element.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <img src="<%= element.img %>" alt="">
+            <hr>
+            <div class="input flex flex-col">
+                <label class="text-[#444] mb-[10px] font-bold text-[20px] uppercase" for="title">title</label>
+                <input class="p-[20px] bg-white outline-none" type="text" name="title" id="title" value="<%= element.title %>">
+            </div>
+            <div class="input flex flex-col">
+                <label class="text-[#444] mb-[10px] font-bold text-[20px] uppercase" for="desc">description</label>
+                <textarea class="p-[20px] bg-white h-[200px] outline-none" name="desc" id="desc"><%= element.desc %></textarea>
+            </div>
+            <div class="input flex flex-col">
+                <label class="text-[#444] mb-[10px] font-bold text-[20px] uppercase" for="img">image</label>
+                <input class="p-[20px] bg-white outline-none" type="file" name="img" id="img">
+            </div>
+            <hr>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input class="py-[10px] bg-[#f7a813] text-white cursor-pointer" type="submit" value="Edit">
+        </form>
+    <% }) %>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search)
+
+            if (params.has("done")) {
+                Swal.fire({
+                    title: 'success',
+                    text: "The operation was completed successfully",
+                    icon: "success",
+                    confirmButtonText: 'DONE'
+                }).then(() => {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                });
+            }
+        })
+</script>

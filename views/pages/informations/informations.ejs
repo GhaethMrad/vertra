@@ -1,0 +1,57 @@
+<form class="flex flex-col gap-[20px]" action="/api/informations?_method=PUT" method="POST">
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] text-[20px] font-bold capitalize" for="brief">brief</label>
+        <textarea class="p-[15px] border-[2px] border-[#f7a813] outline-none h-[250px]" name="brief" id="brief"><%= data.brief %></textarea>
+    </div>
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] text-[20px] font-bold capitalize" for="phNumber">phone number</label>
+        <input class="p-[15px] border-[2px] border-[#f7a813] outline-none" type="tel" name="phNumber" value="<%= data.phNumber %>" id="phNumber">
+    </div>
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] text-[20px] font-bold capitalize" for="email">email</label>
+        <input class="p-[15px] border-[2px] border-[#f7a813] outline-none" type="email" name="email" value="<%= data.email %>" id="email">
+    </div>
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] text-[20px] font-bold capitalize" for="whatsApp">whatsApp</label>
+        <input class="p-[15px] border-[2px] border-[#f7a813] outline-none" type="url" name="whatsApp" value="<%= data.whatsApp %>" id="whatsApp">
+    </div>
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] text-[20px] font-bold capitalize" for="facebook">facebook</label>
+        <input class="p-[15px] border-[2px] border-[#f7a813] outline-none" type="url" name="facebook" value="<%= data.facebook %>" id="facebook">
+    </div>
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] text-[20px] font-bold capitalize" for="instagram">instagram</label>
+        <input class="p-[15px] border-[2px] border-[#f7a813] outline-none" type="url" name="instagram" value="<%= data.instagram %>" id="instagram">
+    </div>
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] text-[20px] font-bold capitalize" for="telegram">telegram</label>
+        <input class="p-[15px] border-[2px] border-[#f7a813] outline-none" type="url" name="telegram" value="<%= data.telegram %>" id="telegram">
+    </div>
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] text-[20px] font-bold capitalize" for="twitter">twitter</label>
+        <input class="p-[15px] border-[2px] border-[#f7a813] outline-none" type="url" name="twitter" value="<%= data.twitter %>" id="twitter">
+    </div>
+    <div class="input flex flex-col gap-[10px]">
+        <label class="text-[#f7a813] text-[20px] font-bold capitalize" for="linkedIn">linkedIn</label>
+        <input class="p-[15px] border-[2px] border-[#f7a813] outline-none" type="url" name="linkedIn" value="<%= data.linkedIn %>" id="linkedIn">
+    </div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input class="p-[15px] bg-[#f7a813] cursor-pointer text-white" type="submit" value="Edit">
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search)
+
+            if (params.has("done")) {
+                Swal.fire({
+                    title: 'success',
+                    text: "The operation was completed successfully",
+                    icon: "success",
+                    confirmButtonText: 'DONE'
+                }).then(() => {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                });
+            }
+        })
+</script>

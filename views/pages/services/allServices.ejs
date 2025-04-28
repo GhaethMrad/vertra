@@ -1,0 +1,48 @@
+<div class="bg-[#eee] mb-[50px] p-[25px] flex flex-col items-center sm:flex-row sm:justify-between">
+    <form class="w-full sm:w-[350px]" action="/api/services/search" method="GET">
+        <div class="input flex">
+            <input class="w-full p-[20px] outline-none bg-white" type="search" name="title" id="" value="<%= searchQuery %>" placeholder="Search By Title">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="flex justify-center items-center cursor-pointer bg-[#222] p-[20px]">
+                <i class="fa-solid fa-search text-white"></i>
+            </button>
+        </div>
+    </form>
+    <a class="py-[10px] px-[25px] bg-[#f7a813] text-white" href="/services/create">Add Service</a>
+</div>
+<% if (data.length > 0) { %>
+<div class="services grid grid-cols-1 gap-[30px] md:grid-cols-2 lg:grid-cols-3">
+    <% data.forEach(ele => { %>
+        <div class="service p-[20px] bg-[#eee] border-[2px] border-[#f7a813] rounded-3xl flex flex-col gap-[20px]">
+            <img src="<%= ele.serviceImage %>" alt="">
+            <h2 class="text-[20px] w-fit mx-auto font-bold text-[#f7a813]"><%= ele.serviceName %></h2>
+            <div class="buttons w-fit mx-auto flex items-center gap-[15px]">
+                <form action="/api/services/<%= ele._id %>?_method=DELETE" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <input class="py-[10px] px-[20px] bg-red-600 cursor-pointer text-white" type="submit" value="DELETE">
+                </form>
+                <a class="py-[10px] px-[20px] bg-[#f7a813] cursor-pointer text-white" href="/services/edit/<%= ele._id %>">Edit</a>
+            </div>
+            <a class="text-[#f7a813] mx-auto underline" href="/services/<%= ele._id %>/sections">Details</a>
+        </div>
+    <% }) %>
+</div>
+<% } else { %>
+<h1 class="w-fit mx-auto text-[25px] font-bold text-[#f7a813] capitalize">Not Found</h1>
+<% } %>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search)
+
+            if (params.has("done")) {
+                Swal.fire({
+                    title: 'success',
+                    text: "The operation was completed successfully",
+                    icon: "success",
+                    confirmButtonText: 'DONE'
+                }).then(() => {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                });
+            }
+        })
+</script>

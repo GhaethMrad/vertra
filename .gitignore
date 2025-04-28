@@ -1,0 +1,57 @@
+# مجلد حزم npm
+node_modules/
+
+# متغيرات البيئة (أسرار المشروع)
+.env
+
+# ملفات التكوين الخاصة بالمطورين
+*.local
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ملفات عملية تثبيت أدوات الـ IDE
+.DS_Store  # خاص بالماك
+Thumbs.db  # خاص بالويندوز
+
+# ملفات التكوين الخاصة بالمحررات
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# ملف التثبيت الخاص بـ npm
+package-lock.json
+# (ملاحظة: بعض الناس يفضلون ترك package-lock.json تحت المراقبة، يعتمد على المشروع)
+
+# ملفات التثبيت الخاصة بـ Yarn أو pnpm لو تستخدمهم
+yarn.lock
+pnpm-lock.yaml
+
+# مخلفات أنظمة التشغيل
+*.swp
+*.bak
+*.tmp
+
+# ملفات التغطية للاختبارات
+coverage/
+
+# إنتاج البناء (لو تبني نسخة جاهزة للنشر)
+dist/
+build/
+
+# ملفات التحزيم للـ Frontend (لو داخل مشروع فيه React/Vue وغيره)
+*.zip
+*.tar
+*.tgz
+
+# ملفات مخرجات eslint أو prettier لو تولد تقرير تلقائي
+eslint-report.*
+prettier-report.*

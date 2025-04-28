@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/style/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title><%= title %></title>
+</head>
+<body class="overflow-x-hidden">
+    <div class="root flex justify-between">
+        <aside class="aside !min-w-full h-screen p-[20px] ml-[-100%] duration-300 sticky top-0 bg-[#eee] sm:!min-w-[300px] sm:ml-0">
+            <a href="/dashboard"><img class="w-[200px] absolute top-0 left-[50%] translate-x-[-50%]" src="/images/Logo.svg" alt=""></a>
+            <i class="fa-solid fa-xmark block cursor-pointer text-[20px] sm:!hidden"></i>
+            <hr class="relative top-[200px]">
+            <ul class="list-disc relative top-[200px] p-[20px] w-fit text-[#3c3c3b] flex flex-col gap-[20px] text-[20px] capitalize">
+                <li><a href="/informations">public information</a></li>
+                <li><a href="/services">services</a></li>
+                <li><a href="/projects">projects</a></li>
+                <li><a href="/message">message</a></li>
+            </ul>
+        </aside>
+        <main class="w-full">
+            <header class="w-full p-[20px] shadow-lg bg-[#eee] text-[30px] text-[#f7a813] sticky top-0 uppercase flex justify-between items-center font-bold sm:justify-center">
+                <i class="bars cursor-pointer fa-solid fa-bars sm:!hidden"></i>
+                <h1>Hello Vertra</h1>
+            </header>
+            <div class="content p-[20px]">
+                <h1 class="page-name my-[50px] font-bold text-white text-[40px] w-full h-[250px] uppercase bg-[#242422] flex justify-center items-center md:rounded-tr-full text-center md:rounded-bl-full"><%= pageName %></h1>
+                <div><%- include(page) %></div>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+                const params = new URLSearchParams(window.location.search)
+    
+                if (params.has("done")) {
+                    Swal.fire({
+                        title: 'success',
+                        text: "The operation was completed successfully",
+                        icon: "success",
+                        confirmButtonText: 'DONE'
+                    }).then(() => {
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    });
+                }
+            })
+    </script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
